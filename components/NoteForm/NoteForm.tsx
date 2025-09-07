@@ -5,7 +5,7 @@ import css from "./NoteForm.module.css";
 import type { NoteTag } from "../../types/note";
 import { createNote } from "@/lib/api";
 import { useRouter } from "next/navigation";
-import { useNoteDraftStore } from "@/lib/store/NoteStore";
+import { useNoteDraftStore } from "@/lib/store/noteStore";
 
 interface NoteFormValuesProps {
   title: string;
