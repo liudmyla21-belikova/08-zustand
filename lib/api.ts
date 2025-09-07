@@ -3,7 +3,6 @@ import type { Note, NoteTag } from '../types/note';
 
 const myKey = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN;
 
-
 interface FetchNotesResponse {
   notes: Note[];
   totalPages: number;
@@ -19,7 +18,7 @@ export interface FetchNotesParams {
 
 export type NoteCreateData = Pick<Note, "title" | "content" | "tag">;
 
-axios.defaults.baseURL = 'https://notehub-public.goit.study/api/notes';
+axios.defaults.baseURL = 'https://notehub-public.goit.study/api';
 const headers = {
   Authorization: `Bearer ${myKey}`,
 };
@@ -28,7 +27,7 @@ export const fetchNotes = async (
   params: FetchNotesParams
 ): Promise<FetchNotesResponse> => {
   const { page = 1, perPage = 12, search = '', tag } = params;
-  const response = await axios.get<FetchNotesResponse>(`notes/`, {
+  const response = await axios.get<FetchNotesResponse>(`/notes`, {
     params: { page, perPage, search, tag },
     headers,
   });
@@ -36,14 +35,14 @@ export const fetchNotes = async (
 };
 
 export const fetchNoteById = async (id: string): Promise<Note> => {
-  const response = await axios.get<Note>(`notes/${id}`, { headers });
+  const response = await axios.get<Note>(`/notes/${id}`, { headers });
   return response.data;
 };
 
 export const createNote = async (
   noteData: Pick<Note, 'title' | 'content' | 'tag'>
 ): Promise<Note> => {
-  const response = await axios.post<Note>('/notes', noteData, {
+  const response = await axios.post<Note>(`/notes`, noteData, {
     headers,
   });
   return response.data;
