@@ -1,12 +1,8 @@
 import axios from 'axios';
 import type { Note, NoteTag } from '../types/note';
 
-axios.defaults.baseURL = 'https://notehub-public.goit.study/api/';
 const myKey = process.env.NEXT_PUBLIC_NOTEHUB_TOKEN;
 
-const headers = {
-  Authorization: `Bearer ${myKey}`,
-};
 
 interface FetchNotesResponse {
   notes: Note[];
@@ -20,6 +16,13 @@ export interface FetchNotesParams {
   search?: string;
   tag?: NoteTag;
 }
+
+export type NoteCreateData = Pick<Note, "title" | "content" | "tag">;
+
+axios.defaults.baseURL = 'https://notehub-public.goit.study/api/notes';
+const headers = {
+  Authorization: `Bearer ${myKey}`,
+};
 
 export const fetchNotes = async (
   params: FetchNotesParams
