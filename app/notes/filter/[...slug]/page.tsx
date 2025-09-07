@@ -6,12 +6,13 @@ import {
 } from "@tanstack/react-query";
 import NotesClient from "./Notes.client";
 import { NoteTag } from "@/types/note";
+import { Metadata } from "next";
 
 type Props = {
   params: Promise<{ slug: string[] }>;
 };
 
-export async function generateMetadata({ params }: Props) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const tag = slug[0] === "All" ? "All notes" : (slug[0] as NoteTag);
   return {
@@ -20,7 +21,7 @@ export async function generateMetadata({ params }: Props) {
     openGraph: {
       title: `${tag}`,
       description: `My notes page with ${tag} filter`,
-      url: `08-zustand-kappa-bice.vercel.app/notes/filter/${slug[0]}`,
+      url: `https://08-zustand-kappa-bice.vercel.app/notes/filter/${slug[0]}`,
       images: [
         {
           url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",

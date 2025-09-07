@@ -26,7 +26,7 @@ export const metadata: Metadata = {
         alt: "Welcome to NoteHub",
       },
     ],
-    url: "08-zustand-kappa-bice.vercel.app/",
+    url: "https://08-zustand-kappa-bice.vercel.app/",
   },
 };
 
